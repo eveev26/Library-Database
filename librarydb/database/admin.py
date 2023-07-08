@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import LibraryBranch, User, Activity, Book
+
+admin.site.register(LibraryBranch)
+admin.site.register(User)
+admin.site.register(Activity)
+admin.site.register(Book)
