@@ -8,21 +8,30 @@ from django.utils import timezone
 # class LibraryBranch(models.Models):
 #     pass
 
+class LibraryBranch(models.Model):
+    branch_name = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.branch_name
+    
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
     pub_date = models.DateField()
-    # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE)
+    isbn = models.IntegerField(null=True)
+    copies = models.IntegerField(default=1)
+    library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
     # on_loan = models.BooleanField(default=False)
 
-class LibraryBranch(models.Model):
-    branch_name = models.CharField(max_length=50)
-    address = models.CharField(max_length=100)
-    books = {models.ForeignKey(Book, on_delete=models.CASCADE):models.IntegerField}
+    def __str__(self):
+        return self.title + ' by ' + self.author
 
 class User(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
+    lib_card = models.BigIntegerField(unique=True, null=True)
     fees = models.FloatField(default=0)
     member_since = models.DateTimeField()
     signed_out = models.ForeignKey(Book, on_delete=models.CASCADE, max_length=5)

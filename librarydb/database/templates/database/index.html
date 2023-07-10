@@ -1,0 +1,28 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'index.css' %}">
+    </head>
+    <body>
+        {% if book_list %}
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Available Location</th>
+            </tr>
+            {% for book in book_list %}
+            <tr>
+                <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
+                <td>{{book.author}}</td>
+                <td>{{book.library}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No books are available.</p>
+        {% endif %}
+    </body>
+</html>
+
