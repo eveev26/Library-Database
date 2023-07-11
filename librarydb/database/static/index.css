@@ -1,3 +1,39 @@
-td {
+
+
+body {
+    font-family: Courier;
+    color: #50677D;
+    background-color: #F2D7D9;
+}
+
+a:link {
+    color: #50677D;
+}
+
+table {
+    background-color: #D3CEDF;
+    box-sizing: border-box;
+    padding: 50px 50px 100px 110px;
+    border: none;
+    border-collapse: collapse;
+    border-radius: 25px;
+}
+
+th, td {
     padding-right: 100px;
+    padding-left: 100px;
+    text-align: justify;
+}
+
+th {
+    padding-top: 20px;
+}
+
+td {
+    padding-bottom: 10px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
