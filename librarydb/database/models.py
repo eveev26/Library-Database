@@ -22,7 +22,6 @@ class Book(models.Model):
     pub_date = models.DateField()
     summary = models.CharField(max_length=1000, null=True)
     isbn = models.IntegerField(null=True)
-    cover = models.ImageField(null=True)
     copies = models.IntegerField(default=1)
     library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
     # on_loan = models.BooleanField(default=False)
