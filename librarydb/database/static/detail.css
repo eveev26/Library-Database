@@ -1,7 +1,48 @@
 @import "style.css";
 
-h2, h3, p {
+h2, h3, h4, p {
     color: #6C7039;
     padding-left: 20px;
-    margin-right: 200px;
+    margin-right: 23%;
+}
+
+.sidebar {
+    height: 64.5%;
+    width: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 115px;
+    right: 10;
+    background-color: #93965D; 
+    overflow-x: hidden;
+    padding-top: 20px;
+    border-radius: 0px 25px 25px 0px;
+}
+
+.pair, .pair2, .pair3 {
+    display: block;
+    border: none;
+    border-collapse: collapse;
+}
+
+.pair {
+    padding: 9px;
+    background-color: #F3B98A;
+    border-radius: 25px 25px 0px 0px;
+}
+
+.pair2 {
+    padding: 9px;
+    background-color: #fac69a;
+}
+
+.pair3 {
+    padding: 9px 9px 20% 9px;
+    background-color: #facda8;
+    border-radius: 0px 0px 25px 25px;
+}
+
+.border {
+    border: 3px solid #6C7039;
+    border-radius: 25px;
 }

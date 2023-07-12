@@ -5,11 +5,35 @@
         <link rel="stylesheet" href="{% static 'detail.css' %}">
     </head>
 
+    <!-- Side navigation -->
+    <div class="sidebar">
+        <h2 style="color: #facda8">Location Available</h2>
+        <p style="color: #facda8">{{ book.library }}</p>
+    </div>
+  
     <body>
         <h1>Home Library</h1>
-        <h2>{{ book.title }}</h2>
-        <h3>by {{ book.author }}</h3>
-        <p>Published on {{ book.pub_date }}</p>
-        <p>{{ book.summary }}</p>
+
+        <div class="border">
+            <div class="pair">
+                <h2>{{ book.title }}</h2>
+                <h3>by {{ book.author }}</h3>
+            </div>
+
+            <div class="pair2">
+                <h4>Published on {{ book.pub_date }}</h4>
+                <h4>ISBN: {{ book.isbn }}</h4>
+            </div>
+            
+            <div class="pair3">
+                <h4>Summary: </h4>
+                {% if book.summary %}
+                    <p>{{ book.summary }}</p>
+                {% else %}
+                    <p>No summary available</p>
+                {% endif %}
+            </div>
+        </div>
+
     </body>
 </html>
