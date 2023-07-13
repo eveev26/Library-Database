@@ -6,6 +6,10 @@ h1 {
     color: #FBDBC0;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     font-family: Courier;
     background-color: #BCC8B4;

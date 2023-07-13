@@ -2,8 +2,9 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.postgres.fields import ArrayField
 
-# Create your models here.
+
 
 # class LibraryBranch(models.Models):
 #     pass
@@ -23,8 +24,12 @@ class Book(models.Model):
     summary = models.CharField(max_length=1000, null=True)
     isbn = models.IntegerField(null=True)
     copies = models.IntegerField(default=1)
-    library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
+    # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
+    library = models.ManyToManyField(LibraryBranch)
     # on_loan = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["title"]
 
     def __str__(self):
         return self.title + ' by ' + self.author

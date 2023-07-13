@@ -9,12 +9,11 @@ h2, h3, h4, p {
 .sidebar {
     height: 64.5%;
     width: 20%;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     top: 115px;
     right: 10;
     background-color: #93965D; 
-    overflow-x: hidden;
     padding-top: 20px;
     border-radius: 0px 25px 25px 0px;
 }
@@ -37,7 +36,7 @@ h2, h3, h4, p {
 }
 
 .pair3 {
-    padding: 9px 9px 20% 9px;
+    padding: 9px 9px 5% 9px;
     background-color: #facda8;
     border-radius: 0px 0px 25px 25px;
 }

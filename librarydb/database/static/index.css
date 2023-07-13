@@ -7,6 +7,7 @@ a:link {
 table {
     color: #6C7039;
     background-color: #F3B98A;
+    /* background-color: black; */
     box-sizing: border-box;
     padding: 50px 50px 100px 110px;
     border: none;
@@ -35,6 +36,22 @@ td {
     margin-right: auto;
 }
 
-#grad {
-    background-image: linear-gradient(#C4889F, #FDE2B1);
+.sidebar {
+    height: 7.5%;
+    width: 20%;
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    right: 8;
+    padding-top: 10px;
+}
+
+.sidebarbutton {
+    color: #6C7039;
+    background-color: #F3B98A;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+    height: 25px;
+    
 }
