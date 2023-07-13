@@ -25,14 +25,17 @@
             {% for book in book_list %}
             <tr>
                 <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
-
                 <td>{{book.author}}</td>
+                <!-- <td>{{book.library}}</td> -->
+                <!-- <td>hi</td> -->
                 <td>
                     {% if library_list %}
                         {% for library in library_list %}
-                            {% if book in library.books.all %}
-                                {{library.branch_name}}
-                            {% endif %}
+                            {% for l in library.books.all %}
+                                {% if l.title == book.title %}
+                                    {{library.branch_name}}
+                                {% endif %}
+                            {% endfor %}
                         {% endfor %}
                     {% endif %}
                 </td>

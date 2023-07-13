@@ -15,10 +15,10 @@ class Book(models.Model):
     pub_date = models.DateField()
     summary = models.CharField(max_length=1000, null=True)
     isbn = models.IntegerField(null=True)
-    copies = models.IntegerField(default=1)
+    # copies = models.IntegerField(default=1)
     # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
     # library = models.ManyToManyField(LibraryBranch)
-    available = models.IntegerField(default=0)
+    # available = models.IntegerField(default=0)
 
     # class Meta:
     #     ordering = ["title"]
