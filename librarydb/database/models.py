@@ -9,12 +9,7 @@ from django.contrib.postgres.fields import ArrayField
 # class LibraryBranch(models.Models):
 #     pass
 
-class LibraryBranch(models.Model):
-    branch_name = models.CharField(max_length=50)
-    address = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.branch_name
     
 
 class Book(models.Model):
@@ -25,15 +20,26 @@ class Book(models.Model):
     isbn = models.IntegerField(null=True)
     copies = models.IntegerField(default=1)
     # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
-    library = models.ManyToManyField(LibraryBranch)
-    # on_loan = models.BooleanField(default=False)
+    # library = models.ManyToManyField(LibraryBranch)
+    # on_loan = models.IntegerField(default=1)
 
-    class Meta:
-        ordering = ["title"]
+    # class Meta:
+    #     ordering = ["title"]
 
     def __str__(self):
         return self.title + ' by ' + self.author
+    
+class LibraryBranch(models.Model):
+    branch_name = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+    books = models.ManyToManyField(Book)
 
+    class Meta:
+        ordering = ["branch_name"]
+
+    def __str__(self):
+        return self.branch_name
+    
 class User(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
