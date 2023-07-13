@@ -9,9 +9,6 @@ from django.contrib.postgres.fields import ArrayField
 # class LibraryBranch(models.Models):
 #     pass
 
-
-    
-
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
@@ -21,7 +18,7 @@ class Book(models.Model):
     copies = models.IntegerField(default=1)
     # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
     # library = models.ManyToManyField(LibraryBranch)
-    # on_loan = models.IntegerField(default=1)
+    available = models.IntegerField(default=0)
 
     # class Meta:
     #     ordering = ["title"]
