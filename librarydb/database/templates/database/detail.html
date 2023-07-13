@@ -8,8 +8,16 @@
     <!-- Side navigation -->
     <div class="sidebar">
         <h2 style="color: #facda8">Location Available</h2>
-        <p style="color: #facda8">{{ book.library }}</p>
         <hr style="border: 2px #facda8 solid; margin: 10px">
+        <ul style="color: #facda8">
+            {% if library_list %}
+                {% for library in library_list %}
+                    {% if book in library.books.all %} <!--check to see if available > 0-->
+                        <li>{{library.branch_name}}</li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
     </div>
   
     <body>
