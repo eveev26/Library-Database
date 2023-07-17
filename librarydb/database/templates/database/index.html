@@ -26,19 +26,20 @@
             <tr>
                 <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
                 <td>{{book.author}}</td>
-                <!-- <td>{{book.library}}</td> -->
                 <!-- <td>hi</td> -->
-                <td>
-                    {% if library_list %}
-                        {% for library in library_list %}
-                            {% for l in library.books.all %}
-                                {% if l.title == book.title %}
-                                    {{library.branch_name}}
+
+                {% if availability_list %}
+                    {% for item in availability_list %}
+                        {% if item.book_id == book.id and library_list %}
+                            {% for library in library_list %}
+                                {% if item in library.books.all %}
+                                    <td>{{library.branch_name}}</td>
                                 {% endif %}
                             {% endfor %}
-                        {% endfor %}
-                    {% endif %}
-                </td>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
             </tr>
             {% endfor %}
         </table>
