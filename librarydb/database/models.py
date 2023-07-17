@@ -5,10 +5,6 @@ from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 
 
-
-# class LibraryBranch(models.Models):
-#     pass
-
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
@@ -16,8 +12,6 @@ class Book(models.Model):
     summary = models.CharField(max_length=1000, null=True)
     isbn = models.IntegerField(null=True)
     # copies = models.IntegerField(default=1)
-    # library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
-    # library = models.ManyToManyField(LibraryBranch)
     # available = models.IntegerField(default=0)
 
     # class Meta:
@@ -26,10 +20,18 @@ class Book(models.Model):
     def __str__(self):
         return self.title + ' by ' + self.author
     
+class BooksAvailable(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True)
+    available = models.IntegerField(default=0)
+    copies = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.book.title
+    
 class LibraryBranch(models.Model):
     branch_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
-    books = models.ManyToManyField(Book)
+    books = models.ManyToManyField(BooksAvailable)
 
     class Meta:
         ordering = ["branch_name"]
@@ -48,7 +50,6 @@ class User(models.Model):
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE)
     loan_date = models.DateTimeField(auto_now=True)
     def loan_date_time():
         now = timezone.now()
