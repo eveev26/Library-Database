@@ -3,4 +3,45 @@
 
 {% block content %}
 
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'search.css' %}">
+    </head>
+
+    {% if searched %}
+        <h2>Search Results for '{{ searched}}'</h2>
+        <br/>
+        {% if search_result %}
+        <table class="center">
+            <tr>
+                <th><h2>Book Title</h2></th>
+                <th><h2>Author</h2></th>
+                <th><h2>Available Location</h2></th>
+            </tr>
+            {% for book in search_result %}
+            <tr>
+                <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
+                <td>{{book.author}}</td>
+
+                {% if availability_list %}
+                    {% for item in availability_list %}
+                        {% if item.book_id == book.id and library_list %}
+                            {% for library in library_list %}
+                                {% if item in library.books.all %}
+                                    <td>{{library.branch_name}}</td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No books are available.</p>
+        {% endif %}
+    {% else %}
+        <h2>Something's missing...</h2>
+    
+    {% endif %}
 {% endblock %}

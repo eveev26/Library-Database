@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, Http404
 from .models import Book, LibraryBranch, BooksAvailable
 from django.template import loader
+from django.utils.datastructures import MultiValueDictKeyError
 
 def index(request):
     book_list = Book.objects.order_by("-title")
@@ -38,4 +39,20 @@ def detail(request, book_id):
 #     return render(request, "database/detail.html", {"book": book})
 
 def search(request):
-    return render(request, 'database/search.html')
+    if request.method == 'POST':
+        try:
+            searched = request.POST['searched']
+        except MultiValueDictKeyError:
+            searched = False
+        search_result = Book.objects.filter(title__contains=searched)
+        library_list = LibraryBranch.objects.order_by("-branch_name")
+        availability_list = BooksAvailable.objects.order_by("-id")
+
+        context = {'searched': searched, 
+                   'search_result': search_result,
+                   "library_list": library_list,
+                   "availability_list": availability_list,}
+        
+        return render(request, 'database/search.html', context)
+    else:
+        return render(request, 'database/search.html', {})

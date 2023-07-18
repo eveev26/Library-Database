@@ -1,0 +1,7 @@
+@import "style.css";
+@import "index.css";
+
+h2, p {
+    color: #6C7039;
+    margin-left: 10px;
+}

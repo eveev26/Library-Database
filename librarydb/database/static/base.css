@@ -4,22 +4,51 @@ a:link {
     color: #6C7039;
 }
 
-.sidebar {
-    height: 7.5%;
-    width: 20%;
-    position: absolute;
-    z-index: 1;
-    top: 8px;
-    right: 8;
-    padding-top: 10px;
+.topnav {
+    background-color: #989B6D;
 }
 
-.sidebarbutton {
-    color: #6C7039;
-    background-color: #F3B98A;
-    border: none;
+#website_title {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    color: #FBDBC0;
+    display:inline-block;
+}
+
+.search_button {
+    color: #facda8;
+    background-color: #6C7039;
     border-radius: 25px;
-    width: 100px;
-    height: 25px;
-    
+    border: none;
+    padding: 10px 30px;
+}
+
+#search_bar {
+    background-color: white;
+    border: 1px solid #6C7039;
+    border-radius: 25px;
+    padding: 10px 80px;
+    text-align: left;
+}
+
+#user_input {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 40%;
+}
+
+.login_button {
+    color: #6C7039;
+    font-size: small;
+    text-align: center;
+    background-color: #F3B98A;
+    border-radius: 25px;
+    border: none;
+    padding: 10px 35px;
+}
+
+.search_button:hover, .login_button:hover{
+    background-color: aqua;
+    color: black;
 }

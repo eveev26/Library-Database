@@ -16,6 +16,7 @@ h2, h3, h4, p {
     background-color: #93965D; 
     padding-top: 20px;
     border-radius: 0px 25px 25px 0px;
+    margin-top: 45px;
 }
 
 .pair, .pair2, .pair3 {
@@ -44,6 +45,7 @@ h2, h3, h4, p {
 .border {
     border: 3px solid #6C7039;
     border-radius: 25px;
+    margin-top: 20px;
 }
 
 #back {

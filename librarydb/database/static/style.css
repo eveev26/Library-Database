@@ -1,9 +1,5 @@
-h1 {
-    padding-top: 20px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    background-color: #989B6D;
-    color: #FBDBC0;
+* {
+    font-family: Courier;
 }
 
 a {
@@ -11,7 +7,6 @@ a {
 }
 
 body {
-    font-family: Courier;
     background-color: #BCC8B4;
     background: white url("images/library.png") no-repeat;
     background-size: cover;

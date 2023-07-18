@@ -5,9 +5,19 @@
 </head>
 <body>
 
-    <a href="http://127.0.0.1:8000/database/">
-        <h1>Home Library</h1>
-    </a>
+    <div class="topnav">
+        <a href="http://127.0.0.1:8000/database/">
+            <h1 id="website_title">Home Library</h1>
+        </a>
+        
+        <form method="POST" action="{% url 'search' %}" id="user_input">
+            {% csrf_token %}
+            <input id="search_bar" name="searched">
+            <button class="search_button">Search</button>
+        </form>
+        
+        <a href="http://127.0.0.1:8000/database/"class="login_button">LogIn</a>
+    </div>
 
     {% block content %}
     {% endblock %}
