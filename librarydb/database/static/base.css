@@ -1,0 +1,25 @@
+@import "style.css";
+
+a:link {
+    color: #6C7039;
+}
+
+.sidebar {
+    height: 7.5%;
+    width: 20%;
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    right: 8;
+    padding-top: 10px;
+}
+
+.sidebarbutton {
+    color: #6C7039;
+    background-color: #F3B98A;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+    height: 25px;
+    
+}

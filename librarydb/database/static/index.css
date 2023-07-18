@@ -1,13 +1,8 @@
 @import "style.css";
 
-a:link {
-    color: #6C7039;
-}
-
 table {
     color: #6C7039;
     background-color: #F3B98A;
-    /* background-color: black; */
     box-sizing: border-box;
     padding: 50px 50px 100px 110px;
     border: none;
@@ -23,8 +18,6 @@ th, td {
 
 th {
     padding-top: 20px;
-    /* background-color: #F7B78C; */
-    /* border-radius: 25px 0px 0px 0px; */
 }
 
 td {
@@ -34,24 +27,4 @@ td {
 .center {
     margin-left: auto;
     margin-right: auto;
-}
-
-.sidebar {
-    height: 7.5%;
-    width: 20%;
-    position: absolute;
-    z-index: 1;
-    top: 8px;
-    right: 8;
-    padding-top: 10px;
-}
-
-.sidebarbutton {
-    color: #6C7039;
-    background-color: #F3B98A;
-    border: none;
-    border-radius: 25px;
-    width: 100px;
-    height: 25px;
-    
 }

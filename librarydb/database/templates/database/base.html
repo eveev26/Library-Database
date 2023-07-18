@@ -1,0 +1,15 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+</head>
+<body>
+
+    <a href="http://127.0.0.1:8000/database/">
+        <h1>Home Library</h1>
+    </a>
+
+    {% block content %}
+    {% endblock %}
+
+</body>

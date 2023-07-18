@@ -1,20 +1,13 @@
+{% extends 'database/base.html' %}
 {% load static %}
+
+{% block content %}
 
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'index.css' %}">
     </head>
     <body>
-
-        <a href="http://127.0.0.1:8000/database/">
-            <h1>Home Library</h1>
-        </a>
-
-        <div class="sidebar">
-            <!-- <h2 style="color: #facda8">Location Available</h2> -->
-            <button type="button", class="sidebarbutton"><strong>Log In</strong></button>
-        </div>
-
         {% if book_list %}
         <table class="center">
             <tr>
@@ -49,3 +42,4 @@
     </body>
 </html>
 
+{% endblock %}
