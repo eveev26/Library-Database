@@ -36,3 +36,6 @@ def detail(request, book_id):
 #     except Book.DoesNotExist:
 #         raise Http404("Book does not exist")
 #     return render(request, "database/detail.html", {"book": book})
+
+def search(request):
+    return render(request, 'database/search.html')

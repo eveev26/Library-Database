@@ -39,8 +39,12 @@
                 {% endif %}
             </div>
         </div>
-
     </body>
+
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <button id="back"><strong>Back</strong></button>
+    </form>
 </html>
 
 {% endblock %}
