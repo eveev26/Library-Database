@@ -8,7 +8,7 @@
     </head>
 
     {% if searched %}
-        <h2>Search Results for '{{ searched}}'</h2>
+        <h2>Search Results for '{{ searched }}'</h2>
         <br/>
         {% if search_result %}
         <table class="center">
@@ -44,4 +44,10 @@
         <h2>Something's missing...</h2>
     
     {% endif %}
+
+    <form method="POST" action="{{request.META.HTTP_REFERER}}"">
+        {% csrf_token %}
+        <button id="back"><strong>Back</strong></button>
+    </form>
+    
 {% endblock %}

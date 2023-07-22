@@ -4,13 +4,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 
-
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
     pub_date = models.DateField()
-    summary = models.CharField(max_length=1000, null=True)
-    isbn = models.IntegerField(null=True)
+    summary = models.CharField(max_length=9000, null=True)
+    isbn = models.CharField(max_length=14, null=True, blank=True)
     # copies = models.IntegerField(default=1)
     # available = models.IntegerField(default=0)
 
@@ -23,10 +22,10 @@ class Book(models.Model):
 class BooksAvailable(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True)
     available = models.IntegerField(default=0)
-    copies = models.IntegerField(default=1)
+    copies = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.book.title
+        return self.book.title + ", " + str(self.id)
     
 class LibraryBranch(models.Model):
     branch_name = models.CharField(max_length=50)

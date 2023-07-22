@@ -5,3 +5,15 @@ h2, p {
     color: #6C7039;
     margin-left: 10px;
 }
+
+#back {
+    color: #facda8;
+    text-align: center;
+    font-size: large;
+    background-color: #6C7039;
+    border-radius: 25px;
+    border: none;
+    padding: 20px 60px;
+    margin-top: 20px;
+    margin-left: 15px;
+}

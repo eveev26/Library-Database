@@ -8,6 +8,20 @@
         <link rel="stylesheet" href="{% static 'index.css' %}">
     </head>
 
+    <form method="POST" class="sort">
+        {% csrf_token %}
+        <h2 style="color: #6C7039; display: inline-block">Order By: </h2>
+        <div id="order">
+            <input type="radio" name="field" value="title">
+            <label>Title</label>
+            <input type="radio" name="field" value="author">
+            <label>Author</label>
+        </div>
+
+        {{ form.as_p }}
+        <button class="submit_button">Submit</button>
+    </form>
+
     <body>
         {% if book_list %}
         <table class="center">
