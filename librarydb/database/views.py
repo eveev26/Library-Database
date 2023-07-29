@@ -5,11 +5,25 @@ from django.template import loader
 from django.utils.datastructures import MultiValueDictKeyError
 
 def index(request):
-    book_list = Book.objects.order_by("-title")
-    library_list = LibraryBranch.objects.order_by("-branch_name")
-    availability_list = BooksAvailable.objects.order_by("-id")
-    # book_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.title;')
-    # library_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.title;')
+    book_list = Book.objects.raw('''SELECT b.id, b.title, b.author, b.pub_date, b.summary, b.isbn 
+                                 FROM database_librarybranch AS l 
+                                 INNER JOIN database_librarybranch_books AS lb 
+                                    ON l.id = lb.librarybranch_id 
+                                 INNER JOIN database_booksavailable AS a 
+                                    ON a.id = lb.booksavailable_id 
+                                 INNER JOIN database_book as b 
+                                    ON b.id = a.book_id 
+                                 ORDER BY b.title;''')
+    
+    library_list = LibraryBranch.objects.raw('''SELECT l.id, l.branch_name, l.address 
+                                             FROM database_librarybranch AS l 
+                                             INNER JOIN database_librarybranch_books AS lb 
+                                                ON l.id = lb.librarybranch_id 
+                                             INNER JOIN database_booksavailable AS a 
+                                                ON a.id = lb.booksavailable_id 
+                                             INNER JOIN database_book as b 
+                                                ON b.id = a.book_id 
+                                             ORDER BY b.title;''')
 
     if request.method == 'POST':
         try:
@@ -17,38 +31,78 @@ def index(request):
         except MultiValueDictKeyError:
             field = False
 
-        # print(field)
-
         if field == 'title':
-            book_list = Book.objects.raw('SELECT * FROM database_book ORDER BY title;')
-            # book_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.title;')
-            # library_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.title;')
+            book_list = Book.objects.raw('''SELECT b.id, b.title, b.author, b.pub_date, b.summary, b.isbn 
+                                         FROM database_librarybranch AS l 
+                                         INNER JOIN database_librarybranch_books AS lb 
+                                            ON l.id = lb.librarybranch_id 
+                                         INNER JOIN database_booksavailable AS a 
+                                            ON a.id = lb.booksavailable_id 
+                                         INNER JOIN database_book as b 
+                                            ON b.id = a.book_id 
+                                         ORDER BY b.title;''')
+            
+            library_list = LibraryBranch.objects.raw('''SELECT l.id, l.branch_name, l.address 
+                                                     FROM database_librarybranch AS l 
+                                                     INNER JOIN database_librarybranch_books AS lb 
+                                                        ON l.id = lb.librarybranch_id 
+                                                     INNER JOIN database_booksavailable AS a 
+                                                        ON a.id = lb.booksavailable_id 
+                                                     INNER JOIN database_book as b 
+                                                        ON b.id = a.book_id 
+                                                     ORDER BY b.title;''')
 
         elif field == 'author':
-            book_list = Book.objects.raw('SELECT * FROM database_book ORDER BY author;')
-            # book_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.author;')
-            # library_list = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id ORDER BY b.author;')
-    
-        # print(book_list)
+            book_list = Book.objects.raw('''SELECT b.id, b.title, b.author, b.pub_date, b.summary, b.isbn 
+                                         FROM database_librarybranch AS l 
+                                         INNER JOIN database_librarybranch_books AS lb 
+                                            ON l.id = lb.librarybranch_id 
+                                         INNER JOIN database_booksavailable AS a 
+                                            ON a.id = lb.booksavailable_id 
+                                         INNER JOIN database_book as b 
+                                            ON b.id = a.book_id 
+                                         ORDER BY b.author;''')
+            
+            library_list = LibraryBranch.objects.raw('''SELECT l.id, l.branch_name, l.address 
+                                                     FROM database_librarybranch AS l 
+                                                     INNER JOIN database_librarybranch_books AS lb 
+                                                        ON l.id = lb.librarybranch_id 
+                                                     INNER JOIN database_booksavailable AS a 
+                                                        ON a.id = lb.booksavailable_id 
+                                                     INNER JOIN database_book as b 
+                                                        ON b.id = a.book_id 
+                                                     ORDER BY b.author;''')
+
+        book_library_list = {}
+        for i in range(len(book_list)):
+            book_list[i].book_library_list = library_list[i]
         
         context = {
             "book_list": book_list,
             "library_list": library_list,
-            "availability_list": availability_list,
-            "field": field
+            "book_library_list": book_library_list,
         }
 
         return render(request, 'database/index.html', context)
     else:
+
+        book_library_list = {}
+        for i in range(len(book_list)):
+            book_library_list[book_list[i]] = library_list[i]
+
         context = {
             "book_list": book_list,
             "library_list": library_list,
-            "availability_list": availability_list,
+            "book_library_list": book_library_list,
         }
         return render(request, 'database/index.html', context)
     
 def detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
+
+    # libraries = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id WHERE b.id = %d ORDER BY b.title ;', [book.id])
+    # for i in libraries:
+    #     print(i)
     avail = []
     for i in BooksAvailable.objects.all():
         if i.book_id == book.id:

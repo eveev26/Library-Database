@@ -23,32 +23,21 @@
     </form>
 
     <body>
-        {% if book_list %}
+        {% if book_library_list %}
         <table class="center">
             <tr>
                 <th><h2>Book Title</h2></th>
                 <th><h2>Author</h2></th>
                 <th><h2>Available Location</h2></th>
             </tr>
-            {% for book in book_list %}
-            <tr>
-                <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
-                <td>{{book.author}}</td>
-                <!-- <td>hi</td> -->
+            {% for book, library in book_library_list.items %}
+                
+                <tr>
+                    <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
+                    <td>{{book.author}}</td>
 
-                {% if availability_list %}
-                    {% for item in availability_list %}
-                        {% if item.book_id == book.id and library_list %}
-                            {% for library in library_list %}
-                                {% if item in library.books.all %}
-                                    <td>{{library.branch_name}}</td>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-            </tr>
+                    <td>{{library.branch_name}}</td>
+                </tr>
             {% endfor %}
         </table>
         {% else %}
