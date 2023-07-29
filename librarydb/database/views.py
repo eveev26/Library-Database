@@ -31,28 +31,8 @@ def index(request):
         except MultiValueDictKeyError:
             field = False
 
-        if field == 'title':
-            book_list = Book.objects.raw('''SELECT b.id, b.title, b.author, b.pub_date, b.summary, b.isbn 
-                                         FROM database_librarybranch AS l 
-                                         INNER JOIN database_librarybranch_books AS lb 
-                                            ON l.id = lb.librarybranch_id 
-                                         INNER JOIN database_booksavailable AS a 
-                                            ON a.id = lb.booksavailable_id 
-                                         INNER JOIN database_book as b 
-                                            ON b.id = a.book_id 
-                                         ORDER BY b.title;''')
-            
-            library_list = LibraryBranch.objects.raw('''SELECT l.id, l.branch_name, l.address 
-                                                     FROM database_librarybranch AS l 
-                                                     INNER JOIN database_librarybranch_books AS lb 
-                                                        ON l.id = lb.librarybranch_id 
-                                                     INNER JOIN database_booksavailable AS a 
-                                                        ON a.id = lb.booksavailable_id 
-                                                     INNER JOIN database_book as b 
-                                                        ON b.id = a.book_id 
-                                                     ORDER BY b.title;''')
-
-        elif field == 'author':
+        print(field)
+        if field == 'author':
             book_list = Book.objects.raw('''SELECT b.id, b.title, b.author, b.pub_date, b.summary, b.isbn 
                                          FROM database_librarybranch AS l 
                                          INNER JOIN database_librarybranch_books AS lb 
@@ -75,7 +55,7 @@ def index(request):
 
         book_library_list = {}
         for i in range(len(book_list)):
-            book_list[i].book_library_list = library_list[i]
+            book_library_list[book_list[i]] = library_list[i]
         
         context = {
             "book_list": book_list,
