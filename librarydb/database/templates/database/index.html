@@ -30,13 +30,19 @@
                 <th><h2>Author</h2></th>
                 <th><h2>Available Location</h2></th>
             </tr>
-            {% for book, library in book_library_list.items %}
+            {% for book, libraries in book_library_list.items %}
                 
                 <tr>
                     <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
                     <td>{{book.author}}</td>
 
-                    <td>{{library.branch_name}}</td>
+                    <td>
+                        {% if libraries|length > 1 %}
+                            {{libraries.0.branch_name}} and others
+                        {% else %}
+                            {{libraries.0.branch_name}}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>

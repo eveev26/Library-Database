@@ -55,7 +55,10 @@ def index(request):
 
         book_library_list = {}
         for i in range(len(book_list)):
-            book_library_list[book_list[i]] = library_list[i]
+            if book_list[i] not in book_library_list:
+                book_library_list[book_list[i]] = [library_list[i]]
+            else:
+                book_library_list[book_list[i]].append(library_list[i])
         
         context = {
             "book_list": book_list,
@@ -68,7 +71,10 @@ def index(request):
 
         book_library_list = {}
         for i in range(len(book_list)):
-            book_library_list[book_list[i]] = library_list[i]
+            if book_list[i] not in book_library_list:
+                book_library_list[book_list[i]] = [library_list[i]]
+            else:
+                book_library_list[book_list[i]].append(library_list[i])
 
         context = {
             "book_list": book_list,
@@ -80,21 +86,38 @@ def index(request):
 def detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
 
-    # libraries = LibraryBranch.objects.raw('SELECT l.id, l.branch_name, l.address FROM database_librarybranch AS l INNER JOIN database_librarybranch_books AS lb ON l.id = lb.librarybranch_id INNER JOIN database_booksavailable AS a ON a.id = lb.booksavailable_id INNER JOIN database_book as b on b.id = a.book_id WHERE b.id = %d ORDER BY b.title ;', [book.id])
-    # for i in libraries:
-    #     print(i)
-    avail = []
-    for i in BooksAvailable.objects.all():
-        if i.book_id == book.id:
-            avail.append(i)
+    libraries = LibraryBranch.objects.raw('''SELECT l.id, l.branch_name, l.address 
+                                          FROM database_librarybranch AS l 
+                                          INNER JOIN database_librarybranch_books AS lb 
+                                            ON l.id = lb.librarybranch_id 
+                                          INNER JOIN database_booksavailable AS a 
+                                            ON a.id = lb.booksavailable_id 
+                                          INNER JOIN database_book as b 
+                                            ON b.id = a.book_id 
+                                          WHERE b.id = %s 
+                                          ORDER BY b.title ;''', [book.id])
     
-    libraries = []
-    for j in LibraryBranch.objects.all():
-        for k in j.books.all():
-            if k in avail:
-                libraries.append(j.branch_name)
+    availability = BooksAvailable.objects.raw('''SELECT a.id, a.available, a.book_id, a.copies 
+                                          FROM database_librarybranch AS l 
+                                          INNER JOIN database_librarybranch_books AS lb 
+                                            ON l.id = lb.librarybranch_id 
+                                          INNER JOIN database_booksavailable AS a 
+                                            ON a.id = lb.booksavailable_id 
+                                          INNER JOIN database_book as b 
+                                            ON b.id = a.book_id 
+                                          WHERE b.id = %s 
+                                          ORDER BY b.title ;''', [book.id])
     
-    return render(request, "database/detail.html", {"book": book, "libraries": libraries})
+    availability_list = {}
+    for i in range(len(libraries)):
+        availability_list[libraries[i]] = [availability[i].available, availability[i].copies]
+    
+    print(availability_list)
+    
+    context = {"book": book,
+               "availability_list": availability_list}
+    
+    return render(request, "database/detail.html", context)
 
 # def detail(request, book_id):
 #     try:
