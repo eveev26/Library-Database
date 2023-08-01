@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("database/", include("database.urls")),
+    path("database/", include("database.urls")), #change url; remove database
     path("admin/", admin.site.urls),
+    path('members/', include('django.contrib.auth.urls')),
+    path('users/', include('users.urls')),
 ]

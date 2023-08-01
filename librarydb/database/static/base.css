@@ -38,7 +38,7 @@ a:link {
     margin-left: 40%;
 }
 
-.login_button {
+.login_button, .logout_button {
     color: #6C7039;
     font-size: small;
     text-align: center;
