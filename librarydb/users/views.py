@@ -15,3 +15,8 @@ def login_user(request):
             return redirect('login')
     else:
         return render(request, 'authentication/login.html', {})
+    
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You Were Logged Out"))
+    return redirect('http://127.0.0.1:8000/database/')
