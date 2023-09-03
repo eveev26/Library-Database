@@ -129,6 +129,20 @@ def detail(request, book_id):
             lib_user = get_object_or_404(User, username=request.user.username)
             print("happy", lib_user)
             Activity.objects.create(username=lib_user, book=book)
+            # LibraryBranch.objects.get(branch_name=borrow).update(books.objects.filter(book=book)=value)
+            # BooksAvailable.objects.get(pk=)
+            # print(LibraryBranch.objects.get(books__book=book))
+            # print(LibraryBranch.objects.get(branch_name=borrow).books)
+            idx = 0
+            for i in range(len(libraries)):
+                if libraries[i] == LibraryBranch.objects.get(branch_name=borrow):
+                    idx = i
+            record = BooksAvailable.objects.get(pk=availability[idx].id)
+            record.available -= 1
+            record.save()
+            # return redirect(str('http://127.0.0.1:8000/database/%s/', str(book_id)))
+            # print(BooksAvailable.objects.get(id=))
+            # print(BooksAvailable.objects.get(pk=borrow.books.))
     
     print(availability_list)
     
