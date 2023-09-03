@@ -55,10 +55,17 @@ class Activity(models.Model):
     #     self.clean()
     #     return super().save(**kwargs)
 
+    def __str__(self):
+        return self.username.username
+        # return self.username.username + ", " + self.book.title + ", " + self.loan_date + " - " + self.return_date
+
 class User(models.Model):
     username = models.CharField(max_length=50)
     # address = models.CharField(max_length=100)
     # lib_card = models.BigIntegerField(unique=True, null=True)
     # fees = models.FloatField(default=0)
     # member_since = models.DateTimeField()
-    signed_out = models.ManyToManyField(Activity, max_length=5)
+    signed_out = models.ManyToManyField(Activity, max_length=5, blank=True)
+
+    def __str__(self):
+        return self.username;

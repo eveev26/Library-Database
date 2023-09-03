@@ -26,7 +26,8 @@
                         {% if available.0 > 0 %}
                         <form method="POST" action=""">
                             {% csrf_token %}
-                            <button name="borrow" value=><strong>Borrow</strong></button>
+                            <!-- <input value="{{library}}"> -->
+                            <button name="borrow" value="{{library.branch_name}}"><strong>Borrow</strong></button>
                         </form>
                         {% endif %}
                     </td>

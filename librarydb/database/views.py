@@ -1,6 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, Http404
-from .models import Book, LibraryBranch, BooksAvailable
+from .models import Book, LibraryBranch, BooksAvailable, Activity, User
 from django.template import loader
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -117,6 +117,18 @@ def detail(request, book_id):
             borrow =  request.POST.get("borrow", None)
         except MultiValueDictKeyError:
             borrow = False
+        
+        print(borrow)
+        # Activity.objects.create()
+        if not request.user.is_authenticated:
+            return redirect('http://127.0.0.1:8000/users/login_user')
+        else:
+            # lib_user = User.objects.raw('''SELECT *
+            #                     FROM database_user
+            #                     WHERE username = %s;''', [request.user.username])
+            lib_user = get_object_or_404(User, username=request.user.username)
+            print("happy", lib_user)
+            Activity.objects.create(username=lib_user, book=book)
     
     print(availability_list)
     

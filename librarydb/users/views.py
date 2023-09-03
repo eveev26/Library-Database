@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from database.models import User;
 
 def login_user(request):
     if request.method == "POST":
@@ -30,6 +31,7 @@ def register_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
+            User.objects.create(username=username)
             login(request, user)
             messages.success(request, ("Registration Successful"))
             return redirect('http://127.0.0.1:8000/database/')
