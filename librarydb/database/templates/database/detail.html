@@ -16,12 +16,20 @@
             <tr>
                 <th><h3 style="color: #facda8; text-align: justify; margin-right: 0%; padding-left: 5px;">Branch</h3></th>
                 <th><h3 style="color: #facda8; text-align: center; padding-left: 50px; margin-right: 20%;">Copies Available</h3></th>
-                <th><h3 style="color: #facda8; text-align: center; margin-right: 0%;">Borrow</h3></th>
+                <th><h3 style="color: #facda8; text-align: center; margin-right: 0%;">Borrow?</h3></th>
             </tr>
             {% for library, available in availability_list.items %}
                 <tr>
                     <td style="text-align: justify">{{library}}</td>
                     <td style="text-align: center">{{available.0}}/{{available.1}}</td>
+                    <td>
+                        {% if available.0 > 0 %}
+                        <form method="POST" action=""">
+                            {% csrf_token %}
+                            <button name="borrow" value=><strong>Borrow</strong></button>
+                        </form>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>

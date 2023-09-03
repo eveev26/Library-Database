@@ -37,17 +37,9 @@ class LibraryBranch(models.Model):
 
     def __str__(self):
         return self.branch_name
-    
-class User(models.Model):
-    name = models.CharField(max_length=50)
-    address = models.CharField(max_length=100)
-    lib_card = models.BigIntegerField(unique=True, null=True)
-    fees = models.FloatField(default=0)
-    member_since = models.DateTimeField()
-    signed_out = models.ForeignKey(Book, on_delete=models.CASCADE, max_length=5)
 
 class Activity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey('User', on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     loan_date = models.DateTimeField(auto_now=True)
     def loan_date_time():
@@ -62,3 +54,11 @@ class Activity(models.Model):
     # def save(self, **kwargs):
     #     self.clean()
     #     return super().save(**kwargs)
+
+class User(models.Model):
+    username = models.CharField(max_length=50)
+    # address = models.CharField(max_length=100)
+    # lib_card = models.BigIntegerField(unique=True, null=True)
+    # fees = models.FloatField(default=0)
+    # member_since = models.DateTimeField()
+    signed_out = models.ManyToManyField(Activity, max_length=5)

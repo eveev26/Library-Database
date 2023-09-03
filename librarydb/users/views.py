@@ -38,3 +38,6 @@ def register_user(request):
 
     context = {'form': form,}
     return render(request, 'authentication/register_user.html', context)
+
+def account(request):
+    return render(request, 'authentication/account.html', {})

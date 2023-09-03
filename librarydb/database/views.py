@@ -111,6 +111,12 @@ def detail(request, book_id):
     availability_list = {}
     for i in range(len(libraries)):
         availability_list[libraries[i]] = [availability[i].available, availability[i].copies]
+
+    if request.method == 'POST':
+        try:
+            borrow =  request.POST.get("borrow", None)
+        except MultiValueDictKeyError:
+            borrow = False
     
     print(availability_list)
     
