@@ -5,38 +5,40 @@
 
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'index.css' %}">
+        <link rel="stylesheet" href="{% static 'index.scss' %}">
     </head>
 
-    <form method="POST" class="sort">
-        {% csrf_token %}
-        <h2 style="color: #6C7039; display: inline-block">Order By: </h2>
-        <div id="order">
-            <input type="radio" name="field" value="title">
-            <label>Title</label>
-            <input type="radio" name="field" value="author">
-            <label>Author</label>
-        </div>
-
-        {{ form.as_p }}
-        <button class="submit_button">Submit</button>
-    </form>
-
+    <div class="container-fluid">
+        <form method="POST" class="sort">
+            {% csrf_token %}
+            <div style="text-align: center;">
+                <h2 style="color: #6C7039; display: inline-block">Order By: </h2>
+                <div id="order">
+                    <input type="radio" name="field" value="title">
+                    <label>Title</label>
+                    <input type="radio" name="field" value="author">
+                    <label>Author</label>
+                </div>
+                {{ form.as_p }}
+                <button class="submit_button">Submit</button>
+            </div>
+        </form>
+    </div>
     <body>
         {% if book_library_list %}
         <table class="center">
             <tr>
                 <th><h2>Book Title</h2></th>
                 <th><h2>Author</h2></th>
-                <th><h2>Available Location</h2></th>
+                <th><h2 style="padding-left: 27%;">Available Location</h2></th>
             </tr>
             {% for book, libraries in book_library_list.items %}
                 
                 <tr>
                     <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
-                    <td>{{book.author}}</td>
+                    <td >{{book.author}}</td>
 
-                    <td>
+                    <td style="padding-left: 10%;">
                         {% if libraries|length > 1 %}
                             {{libraries.0.branch_name}} and others
                         {% else %}

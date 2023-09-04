@@ -1,8 +1,8 @@
-@import "style.css";
+@import "style.scss";
 
 table {
     color: #6C7039;
-    background-color: #F3B98A;
+    background-color: #facda8;
     box-sizing: border-box;
     padding: 50px 50px 100px 100px;
     border: none;
@@ -10,6 +10,7 @@ table {
     border-radius: 25px;
     margin-top: 0.5%;
     width: 100%;
+    font-size: smaller;
 }
 
 th, td {
@@ -37,14 +38,20 @@ td {
 }
 
 .sort {
-    margin-left: 2%;
-    margin-bottom: 0;
+    // margin-left: 2%;
+    padding: 1%;
+    background-color: #F3B98A;
 }
 
 .submit_button {
     color: #facda8;
-    background-color: #6C7039;
-    border-radius: 25px;
+    background-color: #989B6D;
+    border-radius: 5px;
     border: none;
-    padding: 10px 30px;
+    padding: 5px 10px;
+}
+
+.submit_button:hover, .login_button:hover{
+    background-color: #6C7039;
+    color: #facda8;
 }

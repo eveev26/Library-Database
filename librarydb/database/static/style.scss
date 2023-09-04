@@ -1,3 +1,11 @@
+@import "bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/code";
+
+// :root{
+//     --bs-body-font-family: Courier;
+// }
+
 * {
     font-family: Courier;
 }

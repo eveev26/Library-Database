@@ -1,4 +1,4 @@
-@import "style.css";
+@import "style.scss";
 
 a:link {
     color: #6C7039;
@@ -6,6 +6,7 @@ a:link {
 
 .topnav {
     background-color: #989B6D;
+    color: #FBDBC0;
 }
 
 #website_title {
@@ -14,12 +15,13 @@ a:link {
     padding-left: 30px;
     color: #FBDBC0;
     display:inline-block;
+    font-size:xx-large;
 }
 
 .search_button {
     color: #facda8;
     background-color: #6C7039;
-    border-radius: 25px;
+    border-radius: 5px;
     border: none;
     padding: 10px 30px;
 }
@@ -49,6 +51,10 @@ a:link {
 }
 
 .search_button:hover, .login_button:hover{
-    background-color: aqua;
-    color: black;
+    background-color: #F3B98A;
+    color: #6C7039;
+}
+
+#dropdown_style{
+    background-color: #FBDBC0;
 }
