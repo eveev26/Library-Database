@@ -7,28 +7,77 @@
         <link rel="stylesheet" href="{% static 'detail.scss' %}">
     </head>
 
-    <!-- Side navigation -->
-    <div class="sidebar">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-8">
+            <div class="pair">
+                <h2>{{ book.title }}</h2>
+                <h3>by {{ book.author }}</h3>
+            </div>
+
+            <div class="pair2">
+                <h4>Published on {{ book.pub_date }}</h4>
+            </div>
+            
+            <div class="pair3">
+                <h4>Summary: </h4>
+                {% if book.summary %}
+                    <p>{{ book.summary }}</p>
+                {% else %}
+                    <p>No summary available</p>
+                {% endif %}
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="sidebar">
+                <h2 style="color: #facda8">Locations Available</h2>
+                <hr style="border: 2px #facda8 solid; margin: 10px">
+                <table class="center">
+                    <tr>
+                        <th><h3 style="color: #facda8; text-align: justify;">Branch</h3></th>
+                        <th><h3 style="color: #facda8; text-align: justify; padding-left: 20%;">Copies Available</h3></th>
+                        <th><h3 style="color: #facda8; text-align: justify;">Borrow?</h3></th>
+                    </tr>
+                    {% for library, available in availability_list.items %}
+                        <tr>
+                            <td style="text-align: justify; padding-left: 20px;">{{library}}</td>
+                            <td style="text-align: center">{{available.0}}/{{available.1}}</td>
+                            <td style="padding-left: 5%;">
+                                {% if available.0 > 0 %}
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <button class="borrow_button" name="borrow" value="{{library.branch_name}}"><strong>Borrow</strong></button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    
+    <!-- <div class="sidebar">
         <h2 style="color: #facda8">Locations Available</h2>
-        <!-- <p style="color: #facda8">{{ book.library }}</p> -->
         <hr style="border: 2px #facda8 solid; margin: 10px">
         <table class="center">
             <tr>
                 <th><h3 style="color: #facda8; text-align: justify; margin-right: 0%; padding-left: 5px;">Branch</h3></th>
                 <th><h3 style="color: #facda8; text-align: center; padding-left: 50px; margin-right: 20%;">Copies Available</h3></th>
-                <th><h3 style="color: #facda8; text-align: center; margin-right: 0%;">Borrow?</h3></th>
+                <th><h3 style="color: #facda8; text-align: center; margin-right: 0%; margin-left: 15%;">Borrow?</h3></th>
             </tr>
             {% for library, available in availability_list.items %}
                 <tr>
                     <td style="text-align: justify">{{library}}</td>
                     <td style="text-align: center">{{available.0}}/{{available.1}}</td>
-                    <td>
+                    <td style="padding-left: 10%;">
                         {% if available.0 > 0 %}
                         <form method="POST" action="">
-                            <!-- {% url 'detail' book.id %} -->
                             {% csrf_token %}
-                            <!-- <input value="{{library}}"> -->
-                            <button name="borrow" value="{{library.branch_name}}"><strong>Borrow</strong></button>
+                            <button class="borrow_button" name="borrow" value="{{library.branch_name}}"><strong>Borrow</strong></button>
                         </form>
                         {% endif %}
                     </td>
@@ -36,9 +85,8 @@
             {% endfor %}
         </table>
     </div>
-  
-    <body>
 
+    <body>
         <div class="border">
             <div class="pair">
                 <h2>{{ book.title }}</h2>
@@ -47,7 +95,6 @@
 
             <div class="pair2">
                 <h4>Published on {{ book.pub_date }}</h4>
-                <!-- <h4>ISBN: {{ book.isbn }}</h4> -->
             </div>
             
             <div class="pair3">
@@ -59,7 +106,7 @@
                 {% endif %}
             </div>
         </div>
-    </body>
+    </body> -->
 
     <form method="POST" action="{{request.META.HTTP_REFERER}}"">
         {% csrf_token %}

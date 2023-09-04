@@ -3,7 +3,24 @@
 h2, h3, h4, p {
     color: #6C7039;
     padding-left: 20px;
-    margin-right: 40%;
+    // margin-right: 40%;
+    // font-size: medium;
+}
+
+h2{
+    font-size: x-large;
+}
+
+h3{
+    font-size: large;
+}
+
+p{
+    font-size: medium;
+}
+
+h4{
+    font-size: larger;
 }
 
 td {
@@ -16,14 +33,14 @@ td {
 
 .sidebar {
     height: 64.5%;
-    width: 35%;
-    position: absolute;
-    z-index: 1;
-    top: 115px;
-    right: 10;
+    // width: 35%;
+    // position: absolute;
+    // z-index: 1;
+    // top: 115px;
+    // right: 10;
     background-color: #93965D; 
     padding-top: 20px;
-    border-radius: 0px 25px 25px 0px;
+    border-radius: 25px;
     margin-top: 45px;
 }
 
@@ -67,9 +84,22 @@ td {
     text-align: center;
     font-size: large;
     background-color: #6C7039;
-    border-radius: 25px;
+    border-radius: 5px;
     border: none;
     padding: 20px 60px;
     margin-top: 20px;
     margin-left: 15px;
+}
+
+.borrow_button {
+    color: #989B6D;
+    background-color: #facda8;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+}
+
+.borrow_button:hover, .login_button:hover{
+    background-color: #F3B98A;
+    color: #6C7039;
 }
