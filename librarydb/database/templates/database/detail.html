@@ -24,7 +24,8 @@
                     <td style="text-align: center">{{available.0}}/{{available.1}}</td>
                     <td>
                         {% if available.0 > 0 %}
-                        <form method="POST" action="{% url 'detail' book.id %}">
+                        <form method="POST" action="">
+                            <!-- {% url 'detail' book.id %} -->
                             {% csrf_token %}
                             <!-- <input value="{{library}}"> -->
                             <button name="borrow" value="{{library.branch_name}}"><strong>Borrow</strong></button>

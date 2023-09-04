@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Book, LibraryBranch, BooksAvailable, Activity, User
 from django.template import loader
 from django.utils.datastructures import MultiValueDictKeyError
@@ -128,11 +128,7 @@ def detail(request, book_id):
             #                     WHERE username = %s;''', [request.user.username])
             lib_user = get_object_or_404(User, username=request.user.username)
             print("happy", lib_user)
-            Activity.objects.create(username=lib_user, book=book)
-            # LibraryBranch.objects.get(branch_name=borrow).update(books.objects.filter(book=book)=value)
-            # BooksAvailable.objects.get(pk=)
-            # print(LibraryBranch.objects.get(books__book=book))
-            # print(LibraryBranch.objects.get(branch_name=borrow).books)
+            Activity.objects.create(username=lib_user, book=book, library=LibraryBranch.objects.get(branch_name=borrow))
             idx = 0
             for i in range(len(libraries)):
                 if libraries[i] == LibraryBranch.objects.get(branch_name=borrow):
@@ -140,9 +136,7 @@ def detail(request, book_id):
             record = BooksAvailable.objects.get(pk=availability[idx].id)
             record.available -= 1
             record.save()
-            # return redirect(str('http://127.0.0.1:8000/database/%s/', str(book_id)))
-            # print(BooksAvailable.objects.get(id=))
-            # print(BooksAvailable.objects.get(pk=borrow.books.))
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     
     print(availability_list)
     

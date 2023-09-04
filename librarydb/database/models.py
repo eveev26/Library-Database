@@ -41,6 +41,7 @@ class LibraryBranch(models.Model):
 class Activity(models.Model):
     username = models.ForeignKey('User', on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    library = models.ForeignKey(LibraryBranch, on_delete=models.CASCADE, null=True)
     loan_date = models.DateTimeField(auto_now=True)
     def loan_date_time():
         now = timezone.now()

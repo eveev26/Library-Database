@@ -2,4 +2,37 @@
 
 {% block content %}
 
+{% if on_loan %}
+        <table class="center">
+            <tr>
+                <th><h2>Book Title</h2></th>
+                <th><h2>Library</h2></th>
+                <th><h2>Loan Date</h2></th>
+                <th><h2>Due Date</h2></th>
+                <th><h2>Return</h2></th>
+            </tr>
+            {% for activity in on_loan %}
+                
+                <tr>
+                    <td>{{activity.book.title }}</td>
+                    <td>{{activity.library.branch_name}}</td>
+                    <td>{{activity.loan_date}}</td>
+                    <td>{{activity.return_date}}</td>
+                    {% if activity.return_date >= now %}
+                        <td>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <button name="return_book" value="{{activity.id}}"><strong>Return</strong></button>
+                            </form>
+                        </td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No books on loan.</p>
+        {% endif %}
+
 {% endblock %}
