@@ -25,33 +25,69 @@
         </form>
     </div>
     <body>
-        {% if book_library_list %}
+        {% if books %}
         <table class="center">
             <tr>
                 <th><h2>Book Title</h2></th>
                 <th><h2>Author</h2></th>
-                <th><h2 style="padding-left: 27%;">Available Location</h2></th>
+                <th><h2 style="padding-left: 15%;">Available Location</h2></th>
             </tr>
-            {% for book, libraries in book_library_list.items %}
-                
-                <tr>
-                    <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
-                    <td >{{book.author}}</td>
-
-                    <td style="padding-left: 10%;">
-                        {% if libraries|length > 1 %}
-                            {{libraries.0.branch_name}} and others
-                        {% else %}
-                            {{libraries.0.branch_name}}
-                        {% endif %}
-                    </td>
-                </tr>
+            {% for book in books %}
+            <tr>
+                <td><a href="/database/{{ book.0.id }}/">{{ book.0.title }}</a></td>
+                <td >{{book.0.author}}</td>
+                <td style="padding-left: 8%;">
+                    {% if book.1|length > 1 %}
+                        {{book.1.0.branch_name}} and others
+                    {% else %}
+                        {{book.1.0.branch_name}}
+                    {% endif %}
+                </td>
+            </tr>
             {% endfor %}
         </table>
         {% else %}
             <p>No books are available.</p>
         {% endif %}
     </body>
+<!-- 
+    <br/><br/>
+    {{ books }}
+    Has Previous: {{ books.has_previous }} <br/>
+    Has Next: {{ books.has_next }} <br/>
+    Current Page: {{ books.number }} <br/>
+    Number of Pages: {{ books.paginator.num_pages }} <br/>
+    <hr><br/><br/> -->
+
+    <!-- {% if books.has_previous %}
+        <a href="?page=1">&laquo First</a>
+        <a href="?page={{ books.previous_page_number }}"> Previous </a>
+    {% endif %}
+
+    Page {{ books.number }} of {{books.paginator.num_pages }}
+
+    {% if books.has_next %}
+        <a href="?page={{ books.next_page_number }}">Next</a>
+        <a href="?page={{ books.paginator.num_pages}}">Last &raquo</a>
+    {% endif %} -->
+    <br/></br>
+    <div class="container-fluid">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if books.has_previous %}
+                    <!-- <a href="?page=1">&laquo First</a> -->
+                    <li class="page-item"><a class="page-link page" href="?page=1">&laquo First</a></li>
+                    <li class="page-item"><a class="page-link page" href="?page={{ books.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                <li class="page-item"><a class="page-link page" href="">Page {{ books.number }} of {{books.paginator.num_pages }}</a></li>
+                {% if books.has_next %}
+                    <li class="page-item"><a class="page-link page" href="?page={{ books.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link page" href="?page={{ books.paginator.num_pages}}">Last &raquo</a></li>
+                    <!-- <a href="?page={{ books.paginator.num_pages}}">Last &raquo</a> -->
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </html>
 
 {% endblock %}

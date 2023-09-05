@@ -51,7 +51,12 @@ td {
     padding: 5px 10px;
 }
 
-.submit_button:hover, .login_button:hover{
+.submit_button:hover, .login_button:hover, .page:hover{
     background-color: #6C7039;
+    color: #facda8;
+}
+
+.page{
+    background-color: #989B6D;
     color: #facda8;
 }
