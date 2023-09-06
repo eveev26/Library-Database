@@ -13,6 +13,15 @@
             {% csrf_token %}
             <div style="text-align: center;">
                 <h2 style="color: #6C7039; display: inline-block">Order By: </h2>
+                
+                <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="field" id="option2" value="title" autocomplete="off"> Title
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="field" id="option3" value="author"autocomplete="off"> Author
+                    </label>
+                </div> -->
                 <div id="order">
                     <input type="radio" name="field" value="title">
                     <label>Title</label>
@@ -30,13 +39,13 @@
             <tr>
                 <th><h2>Book Title</h2></th>
                 <th><h2>Author</h2></th>
-                <th><h2 style="padding-left: 15%;">Available Location</h2></th>
+                <th><h2 style="text-align: center;">Available Location</h2></th>
             </tr>
             {% for book in books %}
             <tr>
                 <td><a href="/database/{{ book.0.id }}/">{{ book.0.title }}</a></td>
                 <td >{{book.0.author}}</td>
-                <td style="padding-left: 8%;">
+                <td style="text-align: center;">
                     {% if book.1|length > 1 %}
                         {{book.1.0.branch_name}} and others
                     {% else %}

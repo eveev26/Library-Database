@@ -54,24 +54,18 @@ def index(request):
                                                      INNER JOIN database_book as b 
                                                         ON b.id = a.book_id 
                                                      ORDER BY b.author;''')
-
-        # book_library_list = {}
-        # for i in range(len(book_list)):
-        #     if book_list[i] not in book_library_list:
-        #         book_library_list[book_list[i]] = [library_list[i]]
-        #     else:
-        #         book_library_list[book_list[i]].append(library_list[i])
+            
         in_list = False
         book_library_list = [] #[[book1, [lib1, lib2]], ]
         for i in range(len(book_list)):
+            in_list = False
+            print(book_library_list, '\n\n')
             for j in range(len(book_library_list)):
                 if book_library_list[j][0] == book_list[i]:
                     book_library_list[j][1].append(library_list[i])
                     in_list = True
             if not in_list:
                 book_library_list.append([book_list[i], [library_list[i]]])
-        
-        print(book_library_list)
         
         p = Paginator(book_library_list, 10)
         page = request.GET.get('page')
@@ -88,16 +82,10 @@ def index(request):
         return render(request, 'database/index.html', context)
     else:
 
-        # book_library_list = {}
-        # for i in range(len(book_list)):
-        #     if book_list[i] not in book_library_list:
-        #         book_library_list[book_list[i]] = [library_list[i]]
-        #     else:
-        #         book_library_list[book_list[i]].append(library_list[i])
-
         in_list = False
         book_library_list = [] #[[book1, [lib1, lib2]], ]
         for i in range(len(book_list)):
+            in_list = False
             for j in range(len(book_library_list)):
                 if book_library_list[j][0] == book_list[i]:
                     book_library_list[j][1].append(library_list[i])

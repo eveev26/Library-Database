@@ -51,3 +51,19 @@
             </div>
         </div>
     </body>
+
+
+    {% for book, libraries in book_library_list.items %}
+                
+                <tr>
+                    <td><a href="/database/{{ book.id }}/">{{ book.title }}</a></td>
+                    <td >{{book.author}}</td>
+
+                    <td style="padding-left: 10%;">
+                        {% if libraries|length > 1 %}
+                            {{libraries.0.branch_name}} and others
+                        {% else %}
+                            {{libraries.0.branch_name}}
+                        {% endif %}
+                    </td>
+                </tr>
