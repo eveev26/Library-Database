@@ -143,7 +143,7 @@ def detail(request, book_id):
         print(borrow)
         # Activity.objects.create()
         if not request.user.is_authenticated:
-            return redirect('http://127.0.0.1:8000/users/login_user')
+            return redirect('/users/login_user')
         else:
             # lib_user = User.objects.raw('''SELECT *
             #                     FROM database_user

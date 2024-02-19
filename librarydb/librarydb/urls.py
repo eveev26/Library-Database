@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from database import views
 
 urlpatterns = [
+    path('', views.index),
     path("database/", include("database.urls")), #change url; remove database
     path("admin/", admin.site.urls),
     path('members/', include('django.contrib.auth.urls')),

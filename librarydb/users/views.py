@@ -14,7 +14,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('http://127.0.0.1:8000/database/')
+            return redirect('/database/')
         else:
             messages.success(request, ("There Was An Error Logging In. Try Again"))
             return redirect('login')
@@ -24,7 +24,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, ("You Were Logged Out"))
-    return redirect('http://127.0.0.1:8000/database/')
+    return redirect('/database/')
 
 def register_user(request):
     if request.method == "POST":
@@ -37,7 +37,7 @@ def register_user(request):
             User.objects.create(username=username)
             login(request, user)
             messages.success(request, ("Registration Successful"))
-            return redirect('http://127.0.0.1:8000/database/')
+            return redirect('/database/')
     else:
         form = UserCreationForm()
 
@@ -47,7 +47,7 @@ def register_user(request):
 def account(request):
         
     if not request.user.is_authenticated:
-        return redirect('http://127.0.0.1:8000/users/login_user')
+        return redirect('/users/login_user')
     else:
         username = get_object_or_404(User, username=request.user.username)
         print(username)
